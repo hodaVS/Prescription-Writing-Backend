@@ -41,18 +41,18 @@ async def chat(request: ChatRequest = Body(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/save_prescription")
-async def save_prescription(prescription: str = Form(...)):
-    try:
-        prescription_data = json.loads(prescription)
-        result = await backend.save_prescription_data(prescription_data) 
-        if "error" in result:
-            raise HTTPException(status_code=400, detail=result["error"])
-        return result
-    except json.JSONDecodeError:
-        raise HTTPException(status_code=400, detail="Invalid JSON format")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# @app.post("/save_prescription")
+# async def save_prescription(prescription: str = Form(...)):
+#     try:
+#         prescription_data = json.loads(prescription)
+#         result = await backend.save_prescription_data(prescription_data) 
+#         if "error" in result:
+#             raise HTTPException(status_code=400, detail=result["error"])
+#         return result
+#     except json.JSONDecodeError:
+#         raise HTTPException(status_code=400, detail="Invalid JSON format")
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000)) 
